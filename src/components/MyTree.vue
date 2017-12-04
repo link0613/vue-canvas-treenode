@@ -5,15 +5,16 @@
       <div class="description">
         Select to element to add:
       </div>
-      <div class="row">
+      <div class="row row-just">
         <div class="col-xs-6" v-on:click="addNode(2)">
-          <button class="btn btn-condition"><i class="icon-condition"/>Condition</button>
+          <button class="btn btn-condition"><div class="icon-condition"/></button>
         </div>
         <div  class="col-xs-6" v-on:click="addNode(1)">
-          <button class="btn btn-action">Action</button>
+          <button class="btn btn-action"><div class="icon-action"/></button>
         </div>
       </div>    
     </div>
+    <button class="btn btn-save"  v-on:click="getResult()">Save</button>
   </div>
 </template>
 
@@ -56,7 +57,6 @@ export default {
     
       this.getTree();
       this.visibleDiag=false;
-      this.getResult();
     },
     getTreeSize:function(obj, depth, left, jPath){
       var ptr = this;
@@ -134,10 +134,17 @@ export default {
 
       //addText
       function addText(context,x,y,w,h,text,size,color){
-        context.font = size+'pt Georgia';
-        context.textAlign = 'center';
-        context.fillStyle = color;
-        context.fillText(text, x+w/2, y+h/2+size/2-3);
+        if (text=='+'){
+          context.font = size+'pt Serif';
+          context.textAlign = 'center';
+          context.fillStyle = color;
+          context.fillText(text, x+w/2, y+h/2+size/2-2);
+        }else{
+          context.font = size+'pt Arial';
+          context.textAlign = 'center';
+          context.fillStyle = color;
+          context.fillText(text, x+w/2, y+h/2+size/2-1);
+        }
       }
 
 
@@ -300,6 +307,7 @@ export default {
       object[stack.shift()] = newValue;
      },
      getResult:function(){
+       console.log("OUTPUT JSON");
        console.log(this.treeData);
      }
 
@@ -332,32 +340,71 @@ a {
 }
 .chooseOne{
   position: fixed;
+  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
+  -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
-  top:30%;
+  top: 30%;
   left: 50%;
-  min-width: 350px;
-  height: 200px;
+  min-width: 450px;
+  height: 180px;
   padding: 20px;
-  background-color:#d3d3d3;
-  border-radius: 6px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 10px 30px #00000052;
+  box-shadow: 0px 10px 30px #00000052;
 }
 .description{
-  padding:40px;
+  font-size: 25px;
+  line-height: 60px;
+  color: #4a4848;
+}
+.row-just{
+  width: 430px !important;
+  padding: 10px;
 }
 .btn-condition{
   background-color: #388AE0 !important;
   color:white;
-  width:120px !important;
+  width:187px !important;
+  height: 60px !important;
+  display: flex;
+  justify-content: center;
 }
 .btn-action{
   background-color: #D252E0 !important;
   color:white;
-  width:120px !important;
+  width:187px !important;
+  height: 60px !important;
+  display: flex;
+  justify-content: center;
+}
+.btn-condition:hover{
+ box-shadow: 0px 0px 10px #388AE0;
+}
+.btn-action:hover{
+ box-shadow: 0px 0px 10px #D252E0;
 }
 .icon-condition{
-  background-image:url("../assets/condition.svg");
-  min-width:30px;
-  min-height:30px;
+  background-image: url("../assets/condition.svg");
+  background-repeat: no-repeat;
+  background-size: 30px;
+  width: 30px;
+  height: 30px;
 }
+.icon-action{
+  background-image: url("../assets/action.svg");
+  background-repeat: no-repeat;
+  background-size: 30px;
+  width: 30px;
+  height: 30px;
+}
+.btn-save{
+  position:fixed;
+  top: 10px;
+  right: 10px;
+  background-color: green !important;
+  color:white;
+}
+
 </style>

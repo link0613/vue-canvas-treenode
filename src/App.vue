@@ -18,4 +18,12 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+@font-face {
+  font-family: 'myfont';
+    src:  url('fonts/myfont.ttf.woff') format('woff'),
+    url('fonts/myfont.ttf.svg#Arial') format('svg'),
+    url('fonts/myfont.ttf.eot');
+    font-weight: normal;
+    font-style: normal;
+}
 </style>
