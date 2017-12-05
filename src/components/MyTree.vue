@@ -135,10 +135,19 @@ export default {
       //addText
       function addText(context,x,y,w,h,text,size,color){
         if (text=='+'){
-          context.font = size+'pt Serif';
-          context.textAlign = 'center';
-          context.fillStyle = color;
-          context.fillText(text, x+w/2, y+h/2+size/2-2);
+          context.strokeStyle = color ;
+          context.beginPath();
+          context.moveTo(x + w / 2 , y + 5 );
+          context.lineTo(x + w / 2 , y + h - 5 );
+          context.lineWidth = 2;
+          context.stroke();
+          context.beginPath();
+          context.moveTo(x + 5 , y + h / 2 );
+          context.lineTo(x + h - 5 , y + h / 2 );
+          context.lineWidth = 2;
+          context.stroke();
+
+
         }else{
           context.font = size+'pt Arial';
           context.textAlign = 'center';
@@ -308,7 +317,7 @@ export default {
      },
      getResult:function(){
        console.log("OUTPUT JSON");
-       console.log(this.treeData);
+       console.log(JSON.stringify(this.treeData));
      }
 
  
